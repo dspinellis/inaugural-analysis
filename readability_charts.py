@@ -11,18 +11,27 @@ metrics = [
     {
         'name': 'SMOG index',
         'f': textstat.smog_index,
+        'color': 'BurlyWood',
     },
     {
         'name': 'Flesh reading ease',
         'f': textstat.flesch_reading_ease,
+        'color': 'GoldenRod',
     },
     {
         'name': 'Gunning fog index',
         'f': textstat.gunning_fog,
+        'color': 'IndianRed',
+    },
+    {
+        'name': 'Number of words',
+        'f': textstat.lexicon_count,
+        'color': 'LightBlue',
     },
     {
         'name': 'Number of difficult words',
         'f': textstat.difficult_words,
+        'color': 'Indigo',
     },
 ]
 
@@ -53,9 +62,12 @@ plt.xticks(rotation=45)
 plt.gcf().subplots_adjust(bottom=0.15)
 plt.gcf().set_size_inches(10, 5)
 
+print(df)
 for m in metrics:
     name = m['name']
-    g = sns.barplot(x="label", y=name, data=df, color='green')
+    print(name)
+    sns.reset_orig()
+    g = sns.barplot(x="label", y=name, data=df, color=m['color'])
     g.set_xticklabels(g.get_xticklabels(), rotation=30)
     g.set(ylabel=name, xlabel='Inaugural Address')
     file_name = name.replace(' ', '_') + '.png'
