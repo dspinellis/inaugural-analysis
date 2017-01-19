@@ -7,6 +7,14 @@ import seaborn as sns
 import sys
 from textstat.textstat import textstat
 
+def lexical_variety(text):
+    """Return the type-token ratio of the text"""
+    words = text.split()
+    unique = {}
+    for w in words:
+        unique[w] = 1
+    return len(unique) / len(words) * 100
+
 metrics = [
     {
         'name': 'SMOG index',
@@ -32,6 +40,11 @@ metrics = [
         'name': 'Number of difficult words',
         'f': textstat.difficult_words,
         'color': 'Indigo',
+    },
+    {
+        'name': 'Lexical variety',
+        'f': lexical_variety,
+        'color': 'DarkSeaGreen',
     },
 ]
 
