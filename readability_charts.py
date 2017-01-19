@@ -37,11 +37,6 @@ metrics = [
         'color': 'LightBlue',
     },
     {
-        'name': 'Number of difficult words',
-        'f': textstat.difficult_words,
-        'color': 'Indigo',
-    },
-    {
         'name': 'Lexical variety',
         'f': lexical_variety,
         'color': 'DarkSeaGreen',
