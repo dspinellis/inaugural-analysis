@@ -19,12 +19,12 @@ metrics = [
     {
         'name': 'SMOG index',
         'f': textstat.smog_index,
-        'color': 'BurlyWood',
+        'color': 'GoldenRod',
     },
     {
         'name': 'Flesh reading ease',
         'f': textstat.flesch_reading_ease,
-        'color': 'GoldenRod',
+        'color': 'DarkTurquoise',
     },
     {
         'name': 'Gunning fog index',
