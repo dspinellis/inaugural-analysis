@@ -62,13 +62,13 @@ df = df.sort_values(by=['year'])
 for m in metrics:
     sns.set_style("darkgrid")
     plt.xticks(rotation=45)
-    plt.gcf().subplots_adjust(bottom=0.15)
+    plt.gcf().subplots_adjust(bottom=0.2)
     plt.gcf().set_size_inches(10, 5)
     name = m['name']
     sns.reset_orig()
     g = sns.barplot(x="label", y=name, data=df, color=m['color'])
-    g.set_xticklabels(g.get_xticklabels(), rotation=30)
-    g.set(ylabel=name, xlabel='Inaugural Address')
+    g.set_xticklabels(g.get_xticklabels(), rotation=40)
+    g.set(ylabel=name, xlabel='')
     file_name = name.replace(' ', '_') + '.png'
     g.get_figure().savefig(file_name, dpi=150)
     plt.gcf().clear()
