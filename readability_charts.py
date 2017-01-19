@@ -58,17 +58,17 @@ data = np.zeros((len(records),), dtype=[('year', 'i4'),
 data[:] = records
 df = pd.DataFrame(data)
 df = df.sort_values(by=['year'])
-plt.xticks(rotation=45)
-plt.gcf().subplots_adjust(bottom=0.15)
-plt.gcf().set_size_inches(10, 5)
 
-print(df)
 for m in metrics:
+    sns.set_style("darkgrid")
+    plt.xticks(rotation=45)
+    plt.gcf().subplots_adjust(bottom=0.15)
+    plt.gcf().set_size_inches(10, 5)
     name = m['name']
-    print(name)
     sns.reset_orig()
     g = sns.barplot(x="label", y=name, data=df, color=m['color'])
     g.set_xticklabels(g.get_xticklabels(), rotation=30)
     g.set(ylabel=name, xlabel='Inaugural Address')
     file_name = name.replace(' ', '_') + '.png'
     g.get_figure().savefig(file_name, dpi=150)
+    plt.gcf().clear()
