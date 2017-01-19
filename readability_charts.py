@@ -8,10 +8,22 @@ import sys
 from textstat.textstat import textstat
 
 metrics = [
-    'SMOG index',
-    'Flesh reading ease',
-    'Funning fog index',
-    'Number of difficult words',
+    {
+        'name': 'SMOG index',
+        'f': textstat.smog_index,
+    },
+    {
+        'name': 'Flesh reading ease',
+        'f': textstat.flesch_reading_ease,
+    },
+    {
+        'name': 'Gunning fog index',
+        'f': textstat.gunning_fog,
+    },
+    {
+        'name': 'Number of difficult words',
+        'f': textstat.difficult_words,
+    },
 ]
 
 records = []
@@ -27,28 +39,24 @@ for file_name in sys.argv[1:]:
         records.append(
             (year,
              str(first_name + middle_initial + ' ' + last_name + "\n" + year),
-             full_name,
-             textstat.smog_index(data),
-             textstat.flesch_reading_ease(data),
-             textstat.gunning_fog(data),
-             textstat.difficult_words(data)
-        ))
+             full_name
+             ) + tuple([m['f'](data) for m in metrics]))
 
 data = np.zeros((len(records),), dtype=[('year', 'i4'),
                                         ('label', 'U20'),
                                         ('full_name', 'U30')] + [
-                                            (x, 'f4') for x in metrics])
+                                            (x['name'], 'f4') for x in metrics])
 data[:] = records
 df = pd.DataFrame(data)
 df = df.sort_values(by=['year'])
-print(records)
 plt.xticks(rotation=45)
 plt.gcf().subplots_adjust(bottom=0.15)
 plt.gcf().set_size_inches(10, 5)
 
-for plot in metrics:
-    g = sns.barplot(x="label", y=plot, data=df, color='green')
+for m in metrics:
+    name = m['name']
+    g = sns.barplot(x="label", y=name, data=df, color='green')
     g.set_xticklabels(g.get_xticklabels(), rotation=30)
-    g.set(ylabel=plot, xlabel='Inaugural Address')
-    file_name = plot.replace(' ', '_') + '.png'
+    g.set(ylabel=name, xlabel='Inaugural Address')
+    file_name = name.replace(' ', '_') + '.png'
     g.get_figure().savefig(file_name, dpi=150)
