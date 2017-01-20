@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import re
 import seaborn as sns
 import sys
+from textblob import TextBlob
 from textstat.textstat import textstat
 
 def lexical_variety(text):
@@ -15,7 +16,25 @@ def lexical_variety(text):
         unique[w] = 1
     return len(unique) / len(words) * 100
 
+def polarity(text):
+    """Return the text's sentiment polarity (-1 negative, 1 positive)"""
+    return TextBlob(text).sentiment.polarity
+
+def subjectivity(text):
+    """Return the text's sentiment subjectivity (0 objective, 1 subjective)"""
+    return TextBlob(text).sentiment.subjectivity
+
 metrics = [
+    {
+        'name': 'Polarity',
+        'f': polarity,
+        'color': 'GoldenRod',
+    },
+    {
+        'name': 'Subjectivity',
+        'f': subjectivity,
+        'color': 'GoldenRod',
+    },
     {
         'name': 'SMOG index',
         'f': textstat.smog_index,
