@@ -28,27 +28,17 @@ metrics = [
     {
         'name': 'Polarity',
         'f': polarity,
-        'color': 'GoldenRod',
+        'color': 'IndianRed',
     },
     {
         'name': 'Subjectivity',
         'f': subjectivity,
-        'color': 'GoldenRod',
+        'color': 'DarkTurquoise',
     },
     {
         'name': 'SMOG index',
         'f': textstat.smog_index,
         'color': 'GoldenRod',
-    },
-    {
-        'name': 'Flesh reading ease',
-        'f': textstat.flesch_reading_ease,
-        'color': 'DarkTurquoise',
-    },
-    {
-        'name': 'Gunning fog index',
-        'f': textstat.gunning_fog,
-        'color': 'IndianRed',
     },
     {
         'name': 'Number of words',
